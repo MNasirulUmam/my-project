@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+// use Hash;
 use DB;
 
 class UserSeeder extends Seeder
@@ -16,20 +18,28 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'username' => 'admin',
+            'first_name' => 'admin',
+            'last_name' => 'company',
+            'email' => 'admin@admin.com',
+            'phone' => '+62'.random_int(00000000000, 99999999999),
             'password' => Hash::make('password123'),
             'role' => 'admin',
-            'created_at' => \Carbon\Carbon::now(),
-            'email_verified_at' => \Carbon\Carbon::now()
+            'company_id' => 1,
+            'department_id' => 1,
+            'remember_token' => Str::random(10),
         ]);
         DB::table('users')->insert([
-            'name' => 'User',
-            'email' => 'user@gmail.com',
+            'username' => 'user',
+            'first_name' => 'user',
+            'last_name' => 'company',
+            'email' => 'user@user.com',
+            'phone' => '+62'.random_int(00000000000, 99999999999),
             'password' => Hash::make('password123'),
             'role' => 'user',
-            'created_at' => \Carbon\Carbon::now(),
-            'email_verified_at' => \Carbon\Carbon::now()
+            'company_id' => '1',
+            'departement_id' => '2',
+            'remember_token' => Str::random(10),
         ]);
     }
 }

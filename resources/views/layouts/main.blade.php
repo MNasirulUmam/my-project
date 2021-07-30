@@ -125,14 +125,25 @@
               <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <strong class="card-title">Data Table</strong>
                         </div>
                         <div class="card-body">
-                          <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                          </table>
+                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            </table>
                         </div>
-                      </div>
+                      </div> -->
+                      <div class="card-header">Dashboard {{ $user->name }}</div>
+
+                        <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+
+                    <p><strong>Selamat datang {{ $user->name }}!</strong> Anda telah melakukan login sebagai {{ $user->role }}</p>
+                </div>
                 </div>        
               </div> 
         </div>
