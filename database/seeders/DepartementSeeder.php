@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use DB;
 
 class DepartementSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class DepartementSeeder extends Seeder
         ];
 
         foreach ($departements as $departement) {
-            Departement::create($departement);
+            DB::table('departements')->insert($departement);
         }
     }
 }

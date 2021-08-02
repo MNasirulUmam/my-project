@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Company;
+use DB;
 
 class CompanySeeder extends Seeder
 {
@@ -30,7 +30,7 @@ class CompanySeeder extends Seeder
         ];
 
         foreach ($companies as $company) {
-            Company::create($company);
+            DB::table('companies')->insert($company);
         }
     }
 }

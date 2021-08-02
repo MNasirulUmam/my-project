@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password123'),
             'role' => 'admin',
             'company_id' => 1,
-            'department_id' => 1,
+            'departement_id' => 1,
             'remember_token' => Str::random(10),
         ]);
         DB::table('users')->insert([
@@ -37,8 +37,8 @@ class UserSeeder extends Seeder
             'phone' => '+62'.random_int(00000000000, 99999999999),
             'password' => Hash::make('password123'),
             'role' => 'user',
-            'company_id' => '1',
-            'departement_id' => '2',
+            'company_id' => 2,
+            'departement_id' => 2,
             'remember_token' => Str::random(10),
         ]);
     }
