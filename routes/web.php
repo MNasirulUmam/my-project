@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;   
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 
@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
  
     Route::get('/logout', function() {
         Auth::logout();
-        redirect('/');
+        return redirect('/');
     });
  
 });

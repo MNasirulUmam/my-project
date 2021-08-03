@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Companie;
+use App\Models\Departement;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -47,12 +49,24 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    protected function showRegistrationForm()
+    {
+        $company = Companie::all();
+        $departement = Departement::all();
+
+        return view('auth.register', compact(['company','departement']));
+    }
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255','unique:users'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'digits_between:10,15'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'company' => ['required', 'not_in:0'],
+            'departement' => ['required', 'not_in:0'],
         ]);
     }
 
@@ -66,8 +80,13 @@ class RegisterController extends Controller
     {
         return User::create([
             'username' => $data['username'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
+            'company_id' => $data['company'],
+            'departement_id' => $data['departement'],
         ]);
     }
 }
