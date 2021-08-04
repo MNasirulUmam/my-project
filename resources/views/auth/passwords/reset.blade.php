@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.login')
+@section('breadcrumbs')
 
 @section('content')
 <div class="container">
