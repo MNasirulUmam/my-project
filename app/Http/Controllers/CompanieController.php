@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Companie;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
-class CompanieControler extends Controller
+class CompanieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +18,8 @@ class CompanieControler extends Controller
      */
     public function index()
     {
-        //
+        $datas = Companie::all();
+        return view('admin.company.index',compact('datas'));
     }
 
     /**

@@ -1,6 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -14,8 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('user.home', compact('user'));
+        $datas = User::all();
+        // $datas = User::join('companie','departement')->('companies','');
+        return view('admin.users.index', compact('datas'));
     }
 
     /**

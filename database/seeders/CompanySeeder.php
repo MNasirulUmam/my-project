@@ -16,13 +16,13 @@ class CompanySeeder extends Seeder
     {
         $companies = [
             [
-                'name' => 'Alton',
+                'name_companie' => 'Alton',
                 'email' => 'alton.indonesia@gmail.com',
                 'logo' => '',
                 'website_url' => 'https://site.alt-on.net',
             ],
             [
-                'name' => 'Shoope',
+                'name_companie' => 'Shoope',
                 'email' => 'support@shopee.co.id',
                 'logo' => '',
                 'website_url' => 'https://shoope.co.id',

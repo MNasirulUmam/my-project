@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', '| Company')
+@section('title', '| Users')
 @section('content') 
 <div class="container">
   <div class="content mt-4">
@@ -16,10 +16,13 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Fist Name</th>
+                        <th>Last Name</th>
                         <th>Email</th>
-                        <th>Logo</th>
-                        <th>Website Url</th>
+                        <th>Phone</th>
+                        <th>Company</th>
+                        <th>Departement</th>
                         <th class="text-center">Action</th>
                       </tr>
                     </thead>
@@ -27,12 +30,13 @@
                       @foreach($datas as $data)
                         <tr>
                           <th scope="row">{{$loop->iteration}}</th>
-                          <td>{{$data->name_companie}}</td>
+                          <td>{{$data->username}}</td>
+                          <td>{{$data->first_name}}</td>
+                          <td>{{$data->last_name}}</td>
                           <td>{{$data->email}}</td>
-                          <td class="text-center">
-                              <img src="{{ Storage::url('public/image/') .$data->logo }} " class="rounded" style="width: 150px">
-                          </td>
-                          <td>{{$data->website_url}}</td>
+                          <td>{{$data->phone}}</td>
+                          <td>{{$data->name_departement}}</td>
+                          <td>{{$data->name_companie}}</td>
                           <td class="text-center">
                             <button href="" type="submit" class="btn btn-primary btn-sm">
                               <span class="fa fa-edit"> Edit</span>

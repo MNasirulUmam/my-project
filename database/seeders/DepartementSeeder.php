@@ -16,11 +16,11 @@ class DepartementSeeder extends Seeder
     {
         $departements = [
             [
-                'name' => 'HR',
+                'name_departement' => 'HR',
                 'description' => 'Selecting job applicants',
             ],
             [
-                'name' => 'Marketing',
+                'name_departement' => 'Marketing',
                 'description' => 'Do promotion',
             ],
             

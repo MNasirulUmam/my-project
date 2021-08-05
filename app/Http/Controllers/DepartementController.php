@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Departement;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\Request;
 
-class DepartementControler extends Controller
+class DepartementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +18,8 @@ class DepartementControler extends Controller
      */
     public function index()
     {
-        //
+        $datas = Departement::all();
+        return view('admin.departement.index',compact('datas'));
     }
 
     /**
