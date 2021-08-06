@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Departement;
+use App\Models\Companie;
 
 class User extends Authenticatable
 {
@@ -48,7 +50,7 @@ class User extends Authenticatable
     ];
     public function company()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Companie::class);
     }
 
     public function departement()

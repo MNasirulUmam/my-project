@@ -9,7 +9,9 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-                <strong class="card-title">Data Table</strong>
+                <strong class="card-title">Data Table</strong><br>
+                <a href="{{route('company.create')}}" type="button" class="btn btn-success btn-sm"><i class="ti-plus"></i> Create</a>
+                <a href="" type="button" class="btn btn-secondary btn-sm"><i class="ti-trash"></i> Restore</a>
             </div>
                 <div class="card-body">
                   <table id="bootstrap-data-table" class="table table-striped table-bordered">

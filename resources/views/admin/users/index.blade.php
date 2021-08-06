@@ -8,11 +8,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header">
-                <strong class="card-title">Data Table</strong>
+            <div class="card-header ">
+                <strong class="card-title">Data Table</strong><br>
+                <a href="{{route('users.create')}}" type="button" class="btn btn-success btn-sm"><i class="ti-plus"></i> Create</a>
+                <a href="" type="button" class="btn btn-secondary btn-sm"><i class="ti-trash"></i> Restore</a>
             </div>
                 <div class="card-body">
-                  <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                   <table id="bootstrap-data-table" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -35,9 +37,9 @@
                           <td>{{$data->last_name}}</td>
                           <td>{{$data->email}}</td>
                           <td>{{$data->phone}}</td>
-                          <td>{{$data->name_departement}}</td>
-                          <td>{{$data->name_companie}}</td>
-                          <td class="text-center">
+                          <td>{{$data->company->name_companie}}</td>
+                          <td>{{$data->departement->name_departement}}</td>
+                          <td>
                             <button href="" type="submit" class="btn btn-primary btn-sm">
                               <span class="fa fa-edit"> Edit</span>
                             </button>

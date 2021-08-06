@@ -20,7 +20,6 @@ class UserController extends Controller
     public function index()
     {
         $datas = User::all();
-        // $datas = User::join('companie','departement')->('companies','');
         return view('admin.users.index', compact('datas'));
     }
 
@@ -31,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**

@@ -29,7 +29,7 @@ class DepartementController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.departement.create');
     }
 
     /**

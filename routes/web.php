@@ -37,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin', [AdminController::class, 'index']);
         Route::resource('admin/company', CompanieController::class);
         Route::resource('admin/departement', DepartementController::class);
-        Route::resource('admin/departement', DepartementController::class);
         Route::resource('admin/users', UserController::class);
         
     });

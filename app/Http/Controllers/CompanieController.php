@@ -29,7 +29,7 @@ class CompanieController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.company.create');
     }
 
     /**
@@ -40,7 +40,29 @@ class CompanieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name_companie'  => 'required|min: 5',
+            'email'          => 'required',
+            'logo'         => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'website_url'    => 'required|min: 5',
+       
+        ]);
+        //upload image
+        $image = $request->file('logo');
+        $image->storeAs('public/image', $image->hashName());
+
+        $data = Companie::create([
+            'name_companie'     => $request->name_companie,
+            'email'   => $request->email,
+            'logo'     => $image->hashName(),
+            'website_url' =>$request->website_url,
+            
+        ]);
+        if($data){
+            return redirect()->route('company.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        }else{
+            return redirect()->route('company.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**

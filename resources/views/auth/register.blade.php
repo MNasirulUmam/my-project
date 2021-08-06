@@ -95,7 +95,7 @@
         <select class="form-control @error('company') is-invalid @enderror" name="company" id="select_company" required>
             <option value="">-- Select Company --</option>
             @foreach($company as $companys)
-                <option value="{{$companys->id}}">{{$companys->name}}</option>
+                <option value="{{$companys->id}}">{{$companys->name_companie}}</option>
             @endforeach
         </select>
 
@@ -113,7 +113,7 @@
         <select class="form-control @error('departement') is-invalid @enderror" name="departement" id="select_department" required>
             <option value="">-- Select Department --</option>
             @foreach($departement as $departments)
-                <option value="{{$departments->id}}">{{$departments->name}}</option>
+                <option value="{{$departments->id}}">{{$departments->name_departement}}</option>
             @endforeach
         </select>
 
