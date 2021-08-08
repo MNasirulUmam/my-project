@@ -36,12 +36,12 @@
                           </td>
                           <td>{{$data->website_url}}</td>
                           <td class="text-center">
-                            <button href="" type="submit" class="btn btn-primary btn-sm">
+                            <a href="{{route('company.edit',[$data->id])}}" type="button" class="btn btn-primary btn-sm">
                               <span class="fa fa-edit"> Edit</span>
-                            </button>
-                            <button href="" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('yakin hapus data ?');">
+                            </a>
+                            <a href="{{route('company.destroy',[$data->id])}}" type="button" class="btn btn-danger btn-sm" onclick="return confirm('yakin hapus data ?');">
                               <span class="fa fa-trash-o"> Delate</span>
-                            </button>
+                            </a>
                           </td>
                         </tr>
                       @endforeach

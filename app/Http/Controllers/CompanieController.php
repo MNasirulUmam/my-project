@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Companie;
+use App\Models\Department;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\DB;
@@ -42,8 +44,8 @@ class CompanieController extends Controller
     {
         $validated = $request->validate([
             'name_companie'  => 'required|min: 5',
-            'email'          => 'required',
-            'logo'         => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'email'          => 'required|email',
+            'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'website_url'    => 'required|min: 5',
        
         ]);
@@ -52,10 +54,10 @@ class CompanieController extends Controller
         $image->storeAs('public/image', $image->hashName());
 
         $data = Companie::create([
-            'name_companie'     => $request->name_companie,
-            'email'   => $request->email,
-            'logo'     => $image->hashName(),
-            'website_url' =>$request->website_url,
+            'name_companie'  => $request->name_companie,
+            'email'          => $request->email,
+            'logo'           => $image->hashName(),
+            'website_url'    => $request->website_url,
             
         ]);
         if($data){
@@ -73,7 +75,7 @@ class CompanieController extends Controller
      */
     public function show($id)
     {
-        //
+        // return view('admin.show-Company', compact('datas'));
     }
 
     /**
@@ -84,7 +86,8 @@ class CompanieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Companie::findOrFail($id);
+        return view('admin.company.edit',compact('data'))->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -96,7 +99,47 @@ class CompanieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name_companie'  => 'required|min: 5',
+            'email'          => 'required|email',
+            'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'website_url'    => 'required|min: 5',
+       
+        ]);
+        $companies = Companie::findOrFail($id); //mencari user berdasarkan id Companie
+
+        if($request->file('logo') == "") {
+
+            $companies->update([
+                'name_companie'  => $request->name_companie,
+                'email'          => $request->email,
+                'website_url'    => $request->website_url,
+                
+            ]);
+    
+        } else {
+    
+            //hapus old image
+            Storage::disk('local')->delete('public/image/'.$companies->image);
+    
+            //upload new image
+            $image = $request->file('logo');
+            $image->storeAs('public/image', $image->hashName());
+    
+            $companies->update([
+                'logo'           => $image->hashName(),
+                'name_companie'  => $request->name_companie,
+                'email'          => $request->email,
+                'website_url'    => $request->website_url,
+                
+            ]);
+    
+        }
+        if($companies){
+            return redirect()->route('company.index')->with(['info' => 'Anda menambahkan item baru']);
+        }else{
+            return redirect()->route('company.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**
@@ -107,6 +150,69 @@ class CompanieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $companies = Companie::findOrFail($id);
+        $companies->delete();
+        return redirect('admin.company.index')->with(['warning' => 'Data Berhasil Hapus Sementara']);
+         
+    }
+
+    public function getDeleteSiswa()
+    {
+        $datas = Companie::onlyTrashed();
+        return view('tong-sampah', compact('datas'));
+    }
+
+    public function restore($id)
+    {
+
+        $company = Companie::onlyTrashed()->where('id', $id);
+        $company->restore();
+
+        if ($company) {
+            return redirect('admin.company.index')->with(['success' => 'Data Berhasil Direstore!']);
+        } else {
+            return redirect('admin.company.trash')->with(['error' => 'Data Gagal Direstore!']);
+        
+        }
+    }
+
+    public function restoreAll()
+    {
+        
+        $compan= Companie::onlyTrashed();
+        $compan->restore();
+
+        if ($sisw) {
+            return redirect('admin.company.index')->with(['success'  => 'Semua Data Berhasil Direstore!']);
+        } else {
+            return redirect('admin.company.trash')->with(['error'    => 'Data Gagal Direstore!']);
+        }
+            
+    }
+
+    public function deletePermanent($id)
+    {
+        
+        $siswas = Companie::onlyTrashed()->where('id',$id);
+        $siswas->forceDelete();
+
+        if ($siswas) {
+            return redirect('admin.company.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
+        } else {
+            return redirect('admin.company.trash')->with(['error'     => 'Data Gagal Dihapus!']);
+        } 
+    }
+
+    public function deleteAll()
+    {
+
+        $compan = Companie::onlyTrashed();
+        $compan->forceDelete();
+
+        if ($sisw) {
+            return redirect('admin.company.index')->with(['success'   => 'Semua Data Berhasil Dihapus Permanen!']);
+        } else {
+            return redirect('admin.company.index')->with(['error'     => 'Data Gagal Dihapus!']);
+        }
     }
 }
