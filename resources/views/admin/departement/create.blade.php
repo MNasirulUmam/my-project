@@ -8,19 +8,26 @@
             <div class="row">
                 <div class="col-lg-12" >
                     <div class="card">
-                      <div class="card-header">Cerate Departemeny</div>
+                      <div class="card-header">{{ __('Create Departement') }}</div>
                         <div class="card-body card-block">
-                            <form action="" method="post" class="">
+                            <form action="{{route('departement.store')}}" method="post" class="">
+                            @csrf
                             <div class="form-group">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                <input type="text" id="name_departement" name="name_departement" placeholder="Name Departement" class="form-control">
+                                <input type="text" id="name_departement" name="name_departement" placeholder="Name Departement" class="form-control @error('name_departement') is-invalid @enderror" value="{{ old('name_departement') }}">
+                                @error('name_departement')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
-                                <input type="text" id="description" name="description" placeholder="Description" class="form-control">
+                                <input type="text" id="description" name="description" placeholder="Description" class="form-control @error('description') is-invalid @enderror" value="{{ old('description') }}">
+                                @error('description')
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-actions form-group"><button type="submit" class="btn btn-success btn-sm">Submit</button></div>

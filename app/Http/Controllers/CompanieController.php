@@ -193,10 +193,10 @@ class CompanieController extends Controller
     public function deletePermanent($id)
     {
         
-        $siswas = Companie::onlyTrashed()->where('id',$id);
-        $siswas->forceDelete();
+        $company = Companie::onlyTrashed()->where('id',$id);
+        $company->forceDelete();
 
-        if ($siswas) {
+        if ($company) {
             return redirect()->route('company.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
         } else {
             return redirect()->route('company.trash')->with(['error'     => 'Data Gagal Dihapus!']);
