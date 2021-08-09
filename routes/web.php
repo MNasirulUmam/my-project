@@ -36,6 +36,11 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
         Route::get('admin', [AdminController::class, 'index']);
         Route::resource('admin/company', CompanieController::class);
+        Route::get('company/trash',	   [App\Http\Controllers\CompanieController::class, 'getDeleteCompanie'])->name('company.trash');
+        Route::get('company/restore/{id}',[App\Http\Controllers\CompanieController::class, 'restore'])->name('company.restore');
+        Route::get('company/restore-all', [App\Http\Controllers\CompanieController::class, 'restoreAll'])->name('company.restoreAll');
+        Route::get('company/delete/{id}', [App\Http\Controllers\CompanieController::class, 'deletePermanent'])->name('company.deletePermanent');
+        Route::get('company/delete-all',  [App\Http\Controllers\CompanieController::class, 'deleteAll'])->name('company.deleteAll');
         Route::resource('admin/departement', DepartementController::class);
         Route::resource('admin/users', UserController::class);
         

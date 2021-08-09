@@ -152,14 +152,14 @@ class CompanieController extends Controller
     {
         $companies = Companie::findOrFail($id);
         $companies->delete();
-        return redirect('admin.company.index')->with(['warning' => 'Data Berhasil Hapus Sementara']);
+        return redirect()->route('company.index')->with(['warning' => 'Data Berhasil Hapus Sementara']);
          
     }
 
-    public function getDeleteSiswa()
+    public function getDeleteCompanie()
     {
-        $datas = Companie::onlyTrashed();
-        return view('tong-sampah', compact('datas'));
+        $datas = Companie::onlyTrashed()->get();
+        return view('admin.company.trash', compact('datas'));
     }
 
     public function restore($id)
@@ -169,9 +169,9 @@ class CompanieController extends Controller
         $company->restore();
 
         if ($company) {
-            return redirect('admin.company.index')->with(['success' => 'Data Berhasil Direstore!']);
+            return redirect()->route('company.trash')->with(['success' => 'Data Berhasil Direstore!']);
         } else {
-            return redirect('admin.company.trash')->with(['error' => 'Data Gagal Direstore!']);
+            return redirect()->route('company.trash')->with(['error' => 'Data Gagal Direstore!']);
         
         }
     }
@@ -182,10 +182,10 @@ class CompanieController extends Controller
         $compan= Companie::onlyTrashed();
         $compan->restore();
 
-        if ($sisw) {
-            return redirect('admin.company.index')->with(['success'  => 'Semua Data Berhasil Direstore!']);
+        if ($compan) {
+            return redirect()->route('company.index')->with(['success'  => 'Semua Data Berhasil Direstore!']);
         } else {
-            return redirect('admin.company.trash')->with(['error'    => 'Data Gagal Direstore!']);
+            return redirect()->route('company.trash')->with(['error'    => 'Data Gagal Direstore!']);
         }
             
     }
@@ -197,9 +197,9 @@ class CompanieController extends Controller
         $siswas->forceDelete();
 
         if ($siswas) {
-            return redirect('admin.company.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
+            return redirect()->route('company.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
         } else {
-            return redirect('admin.company.trash')->with(['error'     => 'Data Gagal Dihapus!']);
+            return redirect()->route('company.trash')->with(['error'     => 'Data Gagal Dihapus!']);
         } 
     }
 
@@ -209,10 +209,10 @@ class CompanieController extends Controller
         $compan = Companie::onlyTrashed();
         $compan->forceDelete();
 
-        if ($sisw) {
-            return redirect('admin.company.index')->with(['success'   => 'Semua Data Berhasil Dihapus Permanen!']);
+        if ($compan) {
+            return redirect()->route('company.index')->with(['success'   => 'Semua Data Berhasil Dihapus Permanen!']);
         } else {
-            return redirect('admin.company.index')->with(['error'     => 'Data Gagal Dihapus!']);
+            return redirect()->route('company.trash')->with(['error'     => 'Data Gagal Dihapus!']);
         }
     }
 }
