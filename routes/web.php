@@ -35,18 +35,21 @@ Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['admin'])->group(function () {
         Route::get('admin', [AdminController::class, 'index']);
+        //Company
         Route::resource('admin/company', CompanieController::class);
         Route::get('company/trash',	   [App\Http\Controllers\CompanieController::class, 'getDeleteCompanie'])->name('company.trash');
         Route::get('company/restore/{id}',[App\Http\Controllers\CompanieController::class, 'restore'])->name('company.restore');
         Route::get('company/restore-all', [App\Http\Controllers\CompanieController::class, 'restoreAll'])->name('company.restoreAll');
         Route::get('company/delete/{id}', [App\Http\Controllers\CompanieController::class, 'deletePermanent'])->name('company.deletePermanent');
         Route::get('company/delete-all',  [App\Http\Controllers\CompanieController::class, 'deleteAll'])->name('company.deleteAll');
+        //Departement
         Route::resource('admin/departement', DepartementController::class);
         Route::get('departement/trash',	   [App\Http\Controllers\DepartementController::class, 'getDeleteDepartement'])->name('departement.trash');
         Route::get('departement/restore/{id}',[App\Http\Controllers\DepartementController::class, 'restore'])->name('departement.restore');
         Route::get('departement/restore-all', [App\Http\Controllers\DepartementController::class, 'restoreAll'])->name('departement.restoreAll');
         Route::get('departement/delete/{id}', [App\Http\Controllers\DepartementController::class, 'deletePermanent'])->name('departement.deletePermanent');
         Route::get('departement/delete-all',  [App\Http\Controllers\DepartementController::class, 'deleteAll'])->name('departement.deleteAll');
+        //Users
         Route::resource('admin/users', UserController::class);
         Route::get('users/trash',	   [App\Http\Controllers\UserController::class, 'getDeleteUser'])->name('users.trash');
         Route::get('users/restore/{id}',[App\Http\Controllers\UserController::class, 'restore'])->name('users.restore');
