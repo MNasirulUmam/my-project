@@ -100,8 +100,8 @@ class CompanieController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name_companie'  => 'required|min: 5',
-            'email'          => 'required|email',
+            'name_companie'  => 'required|min: 5|unique:companies',
+            'email'          => 'required|email|unique:companies',
             'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
             'website_url'    => 'required|min: 5',
        

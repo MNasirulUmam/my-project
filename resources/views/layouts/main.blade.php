@@ -13,20 +13,12 @@
     <link rel="stylesheet" href="{{ asset('style/assets/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/css/cs-skin-elastic.css') }}">
+    <link rel="stylesheet" href="{{ asset('style/assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('style/assets/scss/style.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
     
-    <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
-    <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('style/assets/js/main.js') }}"></script>
-    <script type="{{ asset('text/javascript')}}">
-        $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
-        } );
-    </script>
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -124,6 +116,26 @@
             </div>
         
         @yield('breadcrumbs')
-        @yield('content')   
+        @yield('content')  
+        <script src="{{ asset('style/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/popper.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/plugins.js') }}"></script>
+        <script src="{{ asset('style/assets/js/main.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/datatables.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/jszip.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('style/assets/js/lib/data-table/datatables-init.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+            $('#bootstrap-data-table-export').DataTable();
+            } );
+        </script> 
 </body>
 </html>

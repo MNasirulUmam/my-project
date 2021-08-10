@@ -43,7 +43,7 @@ class DepartementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_departement'  => 'required|min: 2',
+            'name_departement'  => 'required|min: 2|unique:departements',
             'description'       => 'required|min: 5',
         ]);
         $data   = $request->all();
@@ -153,7 +153,7 @@ class DepartementController extends Controller
         $depart = Departement::onlyTrashed()->where('id',$id);
         $depart->forceDelete();
 
-        if ($siswas) {
+        if ($depart) {
             return redirect()->route('departement.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
         } else {
             return redirect()->route('departement.trash')->with(['error'     => 'Data Gagal Dihapus!']);

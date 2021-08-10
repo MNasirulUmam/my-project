@@ -48,7 +48,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('departement/delete/{id}', [App\Http\Controllers\DepartementController::class, 'deletePermanent'])->name('departement.deletePermanent');
         Route::get('departement/delete-all',  [App\Http\Controllers\DepartementController::class, 'deleteAll'])->name('departement.deleteAll');
         Route::resource('admin/users', UserController::class);
-        
+        Route::get('users/trash',	   [App\Http\Controllers\UserController::class, 'getDeleteUser'])->name('users.trash');
+        Route::get('users/restore/{id}',[App\Http\Controllers\UserController::class, 'restore'])->name('users.restore');
+        Route::get('users/restore-all', [App\Http\Controllers\UserController::class, 'restoreAll'])->name('users.restoreAll');
+        Route::get('users/delete/{id}', [App\Http\Controllers\UserController::class, 'deletePermanent'])->name('users.deletePermanent');
+        Route::get('users/delete-all',  [App\Http\Controllers\UserController::class, 'deleteAll'])->name('users.deleteAll');
+    
     });
  
     Route::middleware(['user'])->group(function () {

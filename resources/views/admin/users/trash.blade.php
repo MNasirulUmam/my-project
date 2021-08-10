@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', '| Users')
+@section('title', '| Trash Users')
 @section('content') 
 <div class="container">
   <div class="content mt-4">
@@ -10,8 +10,8 @@
           <div class="card">
             <div class="card-header ">
                 <strong class="card-title">Data Table</strong><br>
-                <a href="{{route('users.create')}}" type="button" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Create</a>
-                <a href="{{route('users.trash')}}" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-shopping-cart"></i> Restore</a>
+                <a href="{{route('users.deleteAll')}}" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Delete Permanen ?');"><i class=" fa fa-times"></i> Delete All</a>
+                <a href="{{route('users.restoreAll')}}" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-reply-all"></i> Restore All</a>
             </div>
                 <div class="card-body">
                    <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -40,17 +40,12 @@
                           <td>{{$data->company->name_companie}}</td>
                           <td>{{$data->departement->name_departement}}</td>
                           <td>
-                            <a href="{{route('users.edit',[$data->id])}}" type="submit" class="btn btn-primary btn-sm">
-                              <span class="fa fa-edit"> Edit</span>
+                            <a href="{{route('users.restore',[$data->id])}}" type="submit" class="btn btn-primary btn-sm">
+                              <span class="fa fa-reply"> Restore</span>
                             </a>
-                            <form action="{{route('users.destroy', [$data->id]) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class=" btn btn-danger btn-sm" onclick= "return confirm('Apakah anda ingin menghapus item.?'); event.preventDefault();
-                                document.getElementById('delete-item').submit();">
-                                <span class="fa fa-trash"> Delete</span>
-                                </button>
-                            </form>
+                            <a href="{{route('users.deletePermanent',[$data->id])}}" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda Yakin Delete Permanen ?');">
+                              <span class="fa fa-trash-o"> Delate</span>
+                            </a>
                           </td>
                         </tr>
                       @endforeach
