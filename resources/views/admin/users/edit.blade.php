@@ -60,29 +60,16 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-unlock-alt"></i></div>
-                                <input type="password" id="password" name="password" placeholder="password" class="form-control @error('password') is-invalid @enderror" value="{{ $data->password}}">
-                                @error('password')
-                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                <input type="password" id="password-confirm" name="password_confirmation" placeholder="Password Confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" value="{{ $data->password_confirmation}}">
-                                @error('password_confirmation')
-                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-building-o"></i></div>
                                 <select class="form-control @error('company') is-invalid @enderror" name="company_id" id="select_company" required>
                                     <option value="">-- Select Company --</option>
                                     @foreach($companies as $company)
-                                        <option value="{{$company->id}}">{{$company->name_companie}}</option>
+                                        @if ($company->id == $data->company_id)
+                                            @php($select = 'selected')
+                                        @else
+                                            @php($select = '')
+                                        @endif
+                                        <option {{$select}} value="{{$company->id}}">{{$company->name_companie}}</option>
                                     @endforeach
                                 </select>
                                 @error('company')
@@ -98,10 +85,14 @@
                                 <select class="form-control @error('departement') is-invalid @enderror" name="departement_id" id="select_department" required>
                                     <option value="">-- Select Department --</option>
                                     @foreach($departements as $department)
-                                        <option value="{{$department->id}}">{{$department->name_departement}}</option>
+                                        @if ($department->id == $data->departement_id)
+                                            @php($select = 'selected')
+                                        @else
+                                            @php($select = '')
+                                        @endif
+                                        <option {{$select}} value="{{$department->id}}">{{$department->name_departement}}</option>
                                     @endforeach
                                 </select>
-
                                 @error('departments')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Companie;
-use App\Models\Department;
+use App\Models\Departement;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\DB;
@@ -43,10 +43,10 @@ class CompanieController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name_companie'  => 'required|min: 5',
-            'email'          => 'required|email',
-            'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            'website_url'    => 'required|min: 5',
+            'name_companie'  => 'required|min: 5|unique:companies',
+            'email'          => 'required|email|unique:companies',
+            'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=100,min_height=100',
+            'website_url'    => 'required|url|',
        
         ]);
         //upload image
@@ -99,14 +99,15 @@ class CompanieController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $companies = Companie::findOrFail($id); //mencari user berdasarkan id Companie
+        // dd($companies);
         $validated = $request->validate([
-            'name_companie'  => 'required|min: 5|unique:companies',
-            'email'          => 'required|email|unique:companies',
-            'logo'           => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'name_companie'  => 'required|min: 5|unique:companies,name_companie,'.$companies->id,
+            'email'          => 'required|email|unique:companies,email,'.$companies->id,
+            'logo'           => 'file|image|mimes:jpeg,png,jpg|max:2048|dimensions:min_width=100,min_height=100',
             'website_url'    => 'required|min: 5',
        
         ]);
-        $companies = Companie::findOrFail($id); //mencari user berdasarkan id Companie
 
         if($request->file('logo') == "") {
 
@@ -192,10 +193,9 @@ class CompanieController extends Controller
 
     public function deletePermanent($id)
     {
-        
         $company = Companie::onlyTrashed()->where('id',$id);
         $company->forceDelete();
-
+       
         if ($company) {
             return redirect()->route('company.trash')->with(['success'   => 'Data Berhasil Dihapus Permanen!']);
         } else {

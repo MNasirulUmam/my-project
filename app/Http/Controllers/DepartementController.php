@@ -88,8 +88,8 @@ class DepartementController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name_departement' => 'min: 2',
-            'description'      => 'min: 5',
+            'name_departement' => 'required|min: 2',
+            'description'      => 'required|min: 5',
         ]);
         $depart = Departement::findOrFail($id);
         $data   = $request->all();

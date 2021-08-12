@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
+
 use Illuminate\Http\Request;
 use Auth;
+
 
 class UserController extends Controller
 {
@@ -118,19 +120,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $employers= User::findOrFail($id);
         $user = $request->validate([
-            'username'   => ['required', 'string', 'max:255'],
+            'username'   => ['required', 'string', 'max:255',Rule::unique('users')->ignore($employers->id)],
             'first_name' => ['required', 'string', 'max:100'],
             'last_name'  => ['required', 'string', 'max:100'],
-            'email'      => ['required', 'string', 'email', 'max:255'],
+            'email'      => ['required', 'string', 'email', 'max:255',Rule::unique('users')->ignore($employers->id)],
             'phone'      => ['required', 'string', 'digits_between:10,15'],
-            'password'   => ['required', 'string', 'min:8', 'confirmed'],
             'company_id'    => ['required', 'not_in:0'],
             'departement_id'=> ['required', 'not_in:0'],
         ]);
 
         $user['password'] = hash::make($request->password);
-        $employers= User::findOrFail($id);
+        
         $employers->update($user);
         if($user){
             return redirect()->route('users.index')->with(['success' => 'Data berhasil Disimpan']);
