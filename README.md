@@ -8,7 +8,7 @@
 </p>
 
 ## My-Project Middle 
-Tugas KP Latihan Mwmbuat Middle Project
+Tugas KP Latihan Membuat Middle Project
 
 ## Clone The Project
 https://github.com/MNasirulUmam/my-project.git
