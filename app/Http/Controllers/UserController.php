@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Http\Request;
 use Auth;
@@ -21,8 +22,25 @@ class UserController extends Controller
      */
     public function index()
     {
-        $datas = User::all();
-        return view('admin.users.index', compact('datas'));
+        
+        $user = Auth::user();
+
+        if ($user->role == 'admin') {
+
+            $datas              = User::all();
+            $companiesCount     = Companie::count();
+            $departmentsCount   = Departement::count();
+            $employeesCount     = User::count();
+
+            return view('admin.users.index', compact(
+                'datas', 
+                'companiesCount',                            
+                'departmentsCount', 
+                'employeesCount',
+            ));
+        }
+            
+        return view('user.index');
     }
 
     /**

@@ -61,6 +61,7 @@ Route::middleware(['auth'])->group(function () {
  
     Route::middleware(['user'])->group(function () {
         Route::get('user', [UserController::class, 'index']);
+        
     });
  
     Route::get('/logout', function() {
