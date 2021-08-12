@@ -26,7 +26,7 @@ php artisan key:generate
 php artisan storage:link
 
 ## Initiate The Database Migration
-php artisan migrate
+php artisan migrate <br>
 php artisan migrate --seed
 
 ## And Lastly, Run the server
