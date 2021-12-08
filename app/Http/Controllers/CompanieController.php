@@ -100,7 +100,6 @@ class CompanieController extends Controller
     public function update(Request $request, $id)
     {
         $companies = Companie::findOrFail($id); //mencari user berdasarkan id Companie
-        // dd($companies);
         $validated = $request->validate([
             'name_companie'  => 'required|min: 5|unique:companies,name_companie,'.$companies->id,
             'email'          => 'required|email|unique:companies,email,'.$companies->id,
@@ -180,10 +179,10 @@ class CompanieController extends Controller
     public function restoreAll()
     {
         
-        $compan= Companie::onlyTrashed();
-        $compan->restore();
+        $company= Companie::onlyTrashed();
+        $company->restore();
 
-        if ($compan) {
+        if ($company) {
             return redirect()->route('company.index')->with(['success'  => 'Semua Data Berhasil Direstore!']);
         } else {
             return redirect()->route('company.trash')->with(['error'    => 'Data Gagal Direstore!']);
@@ -206,10 +205,10 @@ class CompanieController extends Controller
     public function deleteAll()
     {
 
-        $compan = Companie::onlyTrashed();
-        $compan->forceDelete();
+        $company = Companie::onlyTrashed();
+        $company->forceDelete();
 
-        if ($compan) {
+        if ($company) {
             return redirect()->route('company.index')->with(['success'   => 'Semua Data Berhasil Dihapus Permanen!']);
         } else {
             return redirect()->route('company.trash')->with(['error'     => 'Data Gagal Dihapus!']);

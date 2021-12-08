@@ -15,9 +15,9 @@ class AddForeignKeyToUsersTable extends Migration
     {
         
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('company_id')->after('role');
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreignId('departement_id')->after('company_id')->constrained();
+            $table->unsignedBigInteger('companie_id')->after('role');
+            $table->foreign('companie_id')->references('id')->on('companies');
+            $table->foreignId('departement_id')->after('companie_id')->constrained();
         });
     }
 
@@ -29,7 +29,7 @@ class AddForeignKeyToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['company_id', 'departement_id']);
+            $table->dropColumn(['companie_id', 'departement_id']);
         });
     }
 }

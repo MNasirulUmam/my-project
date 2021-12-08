@@ -37,7 +37,7 @@
                           <td>{{$data->last_name}}</td>
                           <td>{{$data->email}}</td>
                           <td>{{$data->phone}}</td>
-                          <td>{{$data->company->name_companie}}</td>
+                          <td>{{$data->companie->name_companie}}</td>
                           <td>{{$data->departement->name_departement}}</td>
                           <td>
                             <a href="{{route('users.edit',[$data->id])}}" type="submit" class="btn btn-primary btn-sm">
